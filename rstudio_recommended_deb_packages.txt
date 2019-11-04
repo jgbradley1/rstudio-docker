@@ -1,0 +1,15 @@
+# libraries needed to install and run RStudio
+gdebi-core
+libapparmor1
+supervisor
+# libraries needed by the rstudio recommended R packages
+default-jdk
+default-jre
+libgit2-dev
+libpng-dev
+libsasl2-dev
+libsodium-dev
+libssh2-1-dev
+libssl-dev
+libxml2-dev
+unixodbc-dev
