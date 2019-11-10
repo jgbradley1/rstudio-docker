@@ -15,7 +15,7 @@ RUN useradd -mg sudo rstudio \
     && echo rstudio:rstudio | chpasswd \
     && mv .Rprofile ~/ \
     && cp ~/.Rprofile /home/rstudio/ && chown rstudio /home/rstudio/.Rprofile \
-    && R -e "pkgs <- readLines('rstudio_recommended_packages.txt'); install.packages(pkgs, Ncpus=2);"
+    && R -e "pkgs <- read.csv('rstudio_recommended_packages.txt', comment.char='#'); pkgs <- as.vector(pkgs[[1]]); install.packages(pkgs, Ncpus=2);"
 
 RUN mkdir -p /var/log/supervisor
 RUN cp ~/.Rprofile /home/rstudio && chown rstudio /home/rstudio/.Rprofile
