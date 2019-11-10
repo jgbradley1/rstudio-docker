@@ -15,7 +15,9 @@ RUN useradd -mg sudo rstudio \
     && echo rstudio:rstudio | chpasswd \
     && mv .Rprofile ~/ \
     && cp ~/.Rprofile /home/rstudio/ && chown rstudio /home/rstudio/.Rprofile \
-    && R -e "pkgs <- read.csv('rstudio_recommended_packages.txt', comment.char='#'); pkgs <- as.vector(pkgs[[1]]); install.packages(pkgs, Ncpus=2);"
+    && R -e "pkgs <- read.csv('rstudio_recommended_packages.txt',comment.char='#'); pkgs <- as.vector(pkgs[[1]]); install.packages(pkgs);" \
+    && R -e "install.packages('pak')" \
+    && R -e "library(pak); pak::pkg_install('tidyverse',ask=F)"
 
 RUN mkdir -p /var/log/supervisor
 RUN cp ~/.Rprofile /home/rstudio && chown rstudio /home/rstudio/.Rprofile
