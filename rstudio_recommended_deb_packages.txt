@@ -13,3 +13,8 @@ libssh2-1-dev
 libssl-dev
 libxml2-dev
 unixodbc-dev
+# libraries need by reticulate
+python3
+python3-dev
+python3-pip
+python3-venv

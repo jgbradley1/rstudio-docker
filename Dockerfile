@@ -14,7 +14,10 @@ RUN R CMD javareconf
 RUN useradd -mg sudo rstudio \
     && echo rstudio:rstudio | chpasswd \
     && mv .Rprofile ~/ \
-    && R -e "pkgs <- readLines('rstudio_recommended_packages.txt'); install.packages(pkgs);"
+    && cp ~/.Rprofile /home/rstudio/ && chown rstudio /home/rstudio/.Rprofile \
+    && R -e "pkgs <- readLines('rstudio_recommended_packages.txt'); install.packages(pkgs, Ncpus=2);"
 
 RUN mkdir -p /var/log/supervisor
+RUN cp ~/.Rprofile /home/rstudio && chown rstudio /home/rstudio/.Rprofile
 CMD ["/usr/bin/supervisord"]
+
